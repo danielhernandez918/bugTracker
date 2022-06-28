@@ -1,0 +1,98 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Sans-Serif;
+}
+
+.full {
+	height: 100%;
+}
+
+.minHeight {
+	min-height: 100%;
+}
+
+@font-face {
+    font-family: 'Elden Ring';
+    src: url(../fonts/Mantinia\ Regular.ttf);
+    
+}
+
+.listText {
+	font-size:50px;
+}
+
+@media print {
+  #printPageButton {
+    display: none;
+
+  }
+}
+
+.black {
+	color: black;
+	text-decoration: none;
+}
+
+.printPadding {
+	padding: 5px;
+	font-weight:bold;
+}
+
+.elden {
+	color: white !important;
+	font-family: Elden Ring;
+	text-shadow: 0 0 3px rgb(0, 0, 0), 0 0 5px rgb(0, 0, 0);
+}
+
+.noLine {
+	text-decoration: none !important;
+	color: black;
+}
+
+.textCenter{
+	text-align:center;
+	margin-left:1px;
+}
+
+.bar {
+	background-color:#353839;
+	display: flex;
+	justify-content:space-evenly;
+}
+.stay {
+	position:fixed;
+    /*width: 100%;*/
+
+}
+
+.white {
+	color:white !important;
+	text-decoration: none !important;
+	text-shadow: 0 0 3px rgb(0, 0, 0), 0 0 5px rgb(0, 0, 0);
+	font-size:200%;
+}
+
+.whiteNoShadow{
+	color:white !important;
+	text-decoration: none !important;
+}
+
+.borderShadow {
+	border-style: solid;
+ 	box-shadow: 2px 2px 10px;
+}
+
+.space {
+	margin-top:5rem;
+}
+
+.boxSize {
+	background-color: grey;
+	height: 25rem;
+	width:25%;
+}
+
+.logo {
+	width:25%;
+}
