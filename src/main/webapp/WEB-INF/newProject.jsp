@@ -10,7 +10,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Home</title>
+	<title>New Project</title>
 </head>
 <body class="full">
 	<div class="d-flex minHeight">
@@ -25,7 +25,7 @@
 			<a class="black textCenter" href="/projects">My Projects</a>
 			<a class="black textCenter" href="/tickets">My Tickets</a>
 			<a class="black textCenter" href="/profile">User Profile</a>
-			<a class="black textCenter" href="/logout">Logout</a>
+            <a class="black textCenter" href="/logout">Logout</a>
 		</div>
 		<div class="col-10">
 			<div class="d-flex justify-content-between align-items-center borderShadow">
@@ -36,23 +36,22 @@
 					<p>User Actions</p>
 				</div>
 			</div>
-			<div class="minHeight">
-				<div class="d-flex justify-content-around space">
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets by Priority</p>
-					</div>
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets by Type</p>
-					</div>
-				</div>
-				<div class="d-flex justify-content-around space">
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets Progress</p>
-					</div>
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets by User</p>
-					</div>
-				</div>
+			<div class="form-control minHeight mx-2 my-2">
+                <form:form action="/project/create" method="post" modelAttribute="project">
+                <form:hidden path="poster" value="${userId}" />
+                <form:errors path="poster" style="color: red"/>
+                    <p class="form-group d-flex align-items-center">
+                        <form:label class="bold" path="title">Title: </form:label>
+                        <form:input class="form-control" path="title"/>
+                        <form:errors path="title" style="color: red"/>
+                    </p>
+                    <p class="form-group d-flex align-items-center">
+                        <form:label class="bold" path="description">Description: </form:label>
+                        <form:textarea row="4" class="form-control" path="description"/>
+                        <form:errors path="description" style="color: red"/>
+                    </p>
+                    <input type="submit" value="Submit"/>	
+                </form:form>
 			</div>
 		</div>
 	</div>

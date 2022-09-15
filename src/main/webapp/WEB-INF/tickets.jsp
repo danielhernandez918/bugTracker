@@ -10,7 +10,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Home</title>
+	<title>Tickets</title>
 </head>
 <body class="full">
 	<div class="d-flex minHeight">
@@ -36,23 +36,16 @@
 					<p>User Actions</p>
 				</div>
 			</div>
-			<div class="minHeight">
-				<div class="d-flex justify-content-around space">
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets by Priority</p>
-					</div>
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets by Type</p>
-					</div>
+			<div class="form-control minHeight mx-2 my-2">
+				<div class="d-flex justify-content-between">
+					<h1>My Tickets:</h1> 
+					<a href="/ticket/new"><button class="black textCenter px-2">New Ticket</button></a>
 				</div>
-				<div class="d-flex justify-content-around space">
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets Progress</p>
-					</div>
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets by User</p>
-					</div>
-				</div>
+                <ul>
+					<c:forEach var="ticket" items="${tickets}">
+						<a href="/tickets/${ticket.id}"><li>${ticket.project} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
+					</c:forEach>
+                </ul>
 			</div>
 		</div>
 	</div>

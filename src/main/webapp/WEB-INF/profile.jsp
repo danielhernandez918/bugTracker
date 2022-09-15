@@ -10,7 +10,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Home</title>
+	<title>Profile</title>
 </head>
 <body class="full">
 	<div class="d-flex minHeight">
@@ -36,23 +36,37 @@
 					<p>User Actions</p>
 				</div>
 			</div>
-			<div class="minHeight">
-				<div class="d-flex justify-content-around space">
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets by Priority</p>
-					</div>
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets by Type</p>
-					</div>
-				</div>
-				<div class="d-flex justify-content-around space">
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets Progress</p>
-					</div>
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets by User</p>
-					</div>
-				</div>
+			<div class="form-control minHeight mx-2 my-2">
+                <h1>Actions for ${userName}:</h1>
+                <ul>
+					<form:form action="/profile/${userId}/edit" method="post" modelAttribute="user">
+						<input type="hidden" name="_method" value="put" />
+						<div class="form-group">
+							<form:label class="bold" path="userName"> User Name</form:label>
+							<form:input path="userName" class="form-control"/>
+							<form:errors path="userName" class="text-danger"/>
+						</div>
+						<div class="form-group">
+							<form:label class="bold" path="email"> Email</form:label>
+							<form:input path="email" class="form-control"/>
+							<form:errors path="email" class="text-danger"/>
+						</div>
+						<!-- <div class="form-group">
+							<form:label class="bold" path="password"> Password</form:label>
+							<form:input path="password" class="form-control"/>
+							<form:errors path="password" class="text-danger"/>
+						</div> -->
+						<!-- <div class="form-group">
+							<form:label class="bold" path="confirm"> New Password</form:label>
+							<form:password path="confirm" class="form-control"/>
+							<form:errors path="confirm" class="text-danger"/>
+						</div> -->
+						<input type="submit" value="Update"/>
+					</form:form>
+					
+                    <li><a href="/profile/${userId}/view">View Profile</a></li>
+                    <li><a href="/profile/${userId}/edit">EditProfile</a></li>
+                </ul>
 			</div>
 		</div>
 	</div>

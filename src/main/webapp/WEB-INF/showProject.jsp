@@ -10,7 +10,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Home</title>
+	<title>Add Partners</title>
 </head>
 <body class="full">
 	<div class="d-flex minHeight">
@@ -28,7 +28,7 @@
 			<a class="black textCenter" href="/logout">Logout</a>
 		</div>
 		<div class="col-10">
-			<div class="d-flex justify-content-between align-items-center borderShadow">
+            <div class="d-flex justify-content-between align-items-center borderShadow">
 				<h1 class="mx-2">Logged in as: Admin</h1>
 				<div class="d-flex mx-2">
 					<p>Search</p>
@@ -36,24 +36,37 @@
 					<p>User Actions</p>
 				</div>
 			</div>
-			<div class="minHeight">
-				<div class="d-flex justify-content-around space">
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets by Priority</p>
-					</div>
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets by Type</p>
-					</div>
-				</div>
-				<div class="d-flex justify-content-around space">
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets Progress</p>
-					</div>
-					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets by User</p>
-					</div>
-				</div>
-			</div>
+            <div class="form-control minHeight mx-2 my-2">
+                <h1>${project.title}</h1>
+                <h3>${project.description}</h3>
+                <p>Leader: ${project.poster.userName}</p>
+				<p>Partners:</p>
+				<c:choose>
+					<c:when test = "${userId == project.poster.id}">
+						<c:forEach var="partner" items="${project.partners}">
+							<p>${partner.userName}</p> 
+						</c:forEach>
+						<form action="/project/${project.id}" method="post" >
+							<select name="userId" id="userId">
+									<c:forEach var="user" items="${unassignedUsers}">
+										<c:choose>
+											<c:when test = "${user.id != project.poster.id}">
+												<option value ="${user.id}" >${user.userName}</option>
+											</c:when>
+											<c:otherwise>
+											<!-- display nothing if project belongs to poster -->
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+							</select>
+							<input class="px-2" type="submit" value="Add Partner"/>
+						</form>
+					</c:when>
+					<c:otherwise>
+
+					</c:otherwise>
+				</c:choose>
+            </div>
 		</div>
 	</div>
 <body>
