@@ -38,12 +38,26 @@
 			</div>
 			<div class="form-control minHeight mx-2 my-2">
 				<div class="d-flex justify-content-between">
-					<h1>My Tickets:</h1> 
+					<h1>Tickets</h1> 
 					<a href="/ticket/new"><button class="black textCenter px-2">New Ticket</button></a>
 				</div>
+				<h3>My Tickets</h3>
                 <ul>
 					<c:forEach var="ticket" items="${tickets}">
-						<a href="/tickets/${ticket.id}"><li>${ticket.project} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
+						<a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
+					</c:forEach>
+				</ul>
+				<h3>Partner Tickets</h3>
+				<ul>
+					<c:forEach var="ticket" items="${partneredTickets}">
+						<c:choose>
+							<c:when test = "${ticket.project.poster.id == ticket.poster.id}">
+							<a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
+							</c:when>
+							<c:otherwise>
+							<!-- display nothing if project belongs to poster -->
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
                 </ul>
 			</div>

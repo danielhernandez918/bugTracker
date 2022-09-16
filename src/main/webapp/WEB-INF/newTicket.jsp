@@ -43,8 +43,14 @@
                 <form:errors path="poster" style="color: red"/>
                     <p class="form-group d-flex align-items-center">
                         <form:label class="bold " path="project">Title: </form:label>
-                        <form:input class="form-control" path="project"/>
-                        <form:errors path="project" style="color: red"/>
+                        <form:select class="form-control" path="project">
+                        <c:forEach var="p" items="${projects}">
+							<form:option value="${p.id}">${p.title}</form:option>
+						</c:forEach>
+                        <c:forEach var="ap" items="${assignedProjects}">
+							<form:option value="${ap.id}">${ap.title}</form:option>
+						</c:forEach>
+                        </form:select>
                     </p>
                     <p class="form-group d-flex align-items-center">
                         <form:label class="bold" path="description">Description: </form:label>
@@ -57,9 +63,6 @@
                             <form:option value="High">High</form:option>
                             <form:option value="Medium">Medium</form:option>
                             <form:option value="Low">Low</form:option>
-                            <!-- <c:forEach var="dojo" items="${dojos}">
-                                <form:option value="${dojo.id}">${dojo.name}</form:option>
-                            </c:forEach> -->
                         </form:select>
                     </div>
                     <input type="submit" value="Submit"/>	

@@ -10,7 +10,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Manage UProject Users</title>
+	<title>Manage Project Users</title>
 </head>
 <body class="full">
 	<div class="d-flex minHeight">
@@ -37,10 +37,10 @@
 				</div>
 			</div>
 			<div class="form-control minHeight mx-2 my-2">
-                <h1>Project Users:</h1>
+                <h1>Project Users</h1>
                 <ul>
 					<c:forEach var="user" items="${users}">
-						<li>${user.userName}</li>
+						<a href="/manageUsers/${user.id}"><li>${user.userName}</li></a>
 					</c:forEach>
                 </ul>
 			</div>

@@ -41,13 +41,13 @@
                 <h3>${project.description}</h3>
                 <p>Leader: ${project.poster.userName}</p>
 				<p>Partners:</p>
+				<c:forEach var="partner" items="${project.partners}">
+					<p>${partner.userName}</p> 
+				</c:forEach>
 				<c:choose>
 					<c:when test = "${userId == project.poster.id}">
-						<c:forEach var="partner" items="${project.partners}">
-							<p>${partner.userName}</p> 
-						</c:forEach>
 						<form action="/project/${project.id}" method="post" >
-							<select name="userId" id="userId">
+							<select name="userId" id="userId" >
 									<c:forEach var="user" items="${unassignedUsers}">
 										<c:choose>
 											<c:when test = "${user.id != project.poster.id}">

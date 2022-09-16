@@ -37,14 +37,14 @@
 				</div>
 			</div>
             <div class="form-control minHeight mx-2 my-2">
-                <h1>${ticket.project} : ${ticket.priority} Priority</h1>
+                <h1>${ticket.project.title} : ${ticket.priority} Priority</h1>
                 <h3>${ticket.description}</h3>
                 <p>Ticket by ${ticket.poster.userName}</p>
                 <p>Status ${ticket.status}</p>
                 <c:if test="${ticket.status == 'Open'}">
                     <form:form action="/tickets/${ticket.id}/update" method="post" modelAttribute="ticket">
                         <input type="hidden" name="_method" value="put" />
-                        <form:hidden path="project" value="${ticket.project}" />
+                        <form:hidden path="project" value="${ticket.project.id}" />
                         <form:hidden path="poster" value="${ticket.poster.id}" />
                         <form:hidden path="description" value="${ticket.description}" />
                         <form:hidden path="priority" value="${ticket.priority}" />
@@ -52,7 +52,6 @@
                         <form:errors path="status" style="color: red"/>
                         <form:errors path="priority" style="color: red"/>
                         <form:errors path="description" style="color: red"/>
-                        <form:errors path="project" style="color: red"/>
                         <form:errors path="poster" style="color: red"/>
 
 

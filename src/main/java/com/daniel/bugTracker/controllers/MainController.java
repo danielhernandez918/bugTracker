@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 //import java.util.ArrayList;
@@ -25,7 +27,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.daniel.bugTracker.services.ProjectService;
+import com.daniel.bugTracker.services.TicketService;
 import com.daniel.bugTracker.services.UserService;
+import com.daniel.bugTracker.models.Project;
+import com.daniel.bugTracker.models.Ticket;
 import com.daniel.bugTracker.models.User;
 
 
@@ -34,40 +40,44 @@ public class MainController {
 	@Autowired
 	UserService userService;
 	
+	 @Autowired 
+	 ProjectService projectService;
+	
+	 @Autowired 
+	 TicketService ticketService;
+	
     @GetMapping("/home")
-    public String home(){
+    public String home(Model model, HttpSession session){
+    	if(session.getAttribute("userId")==null) {
+    		return "redirect:/";
+    	}
+    	Long userId = (Long) session.getAttribute("userId");
+        List<Ticket> tickets = ticketService.findTicketByPoster(userId);
+        Collections.reverse(tickets);
+        model.addAttribute("tickets", tickets);
+        User user = userService.findUser(userId);
+        List<Project> assignedProjects = projectService.getAssignedPartners(user);	
+        List<Ticket> allTickets = ticketService.allTickets();
+        List<Ticket> partneredTickets = new ArrayList();
+        for(Project project:assignedProjects) {
+        	for(Ticket ticket:allTickets) {
+            	if(project.getId() == ticket.getProject().getId()) {
+            		partneredTickets.add(ticket);
+            	}
+        	}
+        }
+        Collections.reverse(partneredTickets);
+        model.addAttribute("partneredTickets", partneredTickets);
         return "home.jsp";
     }
     
     @GetMapping("/manageRole")
-    public String roles (){
+    public String roles (HttpSession session){
+    	if(session.getAttribute("userId")==null) {
+    		return "redirect:/";
+    	}
         return "manageRole.jsp";
     }
-    
-//    @GetMapping("/manageUsers")
-//    public String users(){
-//        return "manageUsers.jsp";
-//    }
-    
-    @RequestMapping("/manageUsers")
-    public String users(Model model, HttpSession session) {
-//    	if(session.getAttribute("userId")==null) {
-//    		return "redirect:/";
-//    	}
-        List<User> users = userService.allUsers();
-        model.addAttribute("users", users);
-		return "manageUsers.jsp";
-    }
-    
-//    @GetMapping("/projects")
-//    public String projects(){
-//        return "projects.jsp";
-//    }
-    
-//    @GetMapping("/tickets")
-//    public String tickets(){
-//        return "tickets.jsp";
-//    }
     
     
 }

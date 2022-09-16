@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import java.util.List;
+
 //import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -20,9 +22,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 //import org.springframework.web.bind.annotation.DeleteMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.daniel.bugTracker.models.User;
 import com.daniel.bugTracker.models.LoginUser;
+import com.daniel.bugTracker.models.Project;
+import com.daniel.bugTracker.services.ProjectService;
 import com.daniel.bugTracker.services.UserService;
 
 @Controller
@@ -30,6 +35,9 @@ public class UserController {
     
      @Autowired
      private UserService userServ;
+     
+	 @Autowired 
+	 ProjectService projectService;
     
     @GetMapping("/")
     public String index(Model model, HttpSession session) {
@@ -111,5 +119,44 @@ public class UserController {
 //            session.setAttribute("userName", user.getUserName());
     		return "redirect:/projects";
     	}
+    }
+    
+    @RequestMapping("/manageUsers")
+    public String users(Model model, HttpSession session) {
+    	if(session.getAttribute("userId")==null) {
+    		return "redirect:/";
+    	}
+        List<User> users = userServ.allUsers();
+        model.addAttribute("users", users);
+		return "manageUsers.jsp";
+    }
+    
+    @GetMapping("/manageUsers/{partnerId}")
+    public String index(Model model, @PathVariable("partnerId") Long partnerId, HttpSession session) {
+    	if(session.getAttribute("userId")==null) {
+    		return "redirect:/";
+    	}
+    	User partner = userServ.findUser(partnerId);
+    	model.addAttribute("partner", partner);
+    	List<Project> projects = projectService.allProjects();
+    	model.addAttribute("projects", projects);
+		model.addAttribute("assignedProjects", projectService.getAssignedPartners(partner));
+		model.addAttribute("unassignedProjects", projectService.getUnassignedPartners(partner));
+    	return "addUsersToProj.jsp";
+    }
+    
+    @PostMapping("/manageUsers/{partnerId}")
+    public String addProject(@PathVariable("partnerId") Long partnerId, @RequestParam(value="projectId") Long projectId,  Model model, HttpSession session) {
+    	if(session.getAttribute("userId")==null) {
+    		return "redirect:/";
+    	}
+
+    	User partner = userServ.findUser(partnerId);
+    	Project project = projectService.findProject(projectId);
+    	partner.getProjects().add(project);
+    	userServ.updateUser(partner);
+		model.addAttribute("assignedProjects", projectService.getAssignedPartners(partner));
+		model.addAttribute("unassignedProjects", projectService.getUnassignedPartners(partner));
+		return "redirect:/manageUsers/" + partnerId;
     }
 }

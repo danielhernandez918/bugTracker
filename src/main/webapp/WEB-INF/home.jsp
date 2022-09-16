@@ -40,6 +40,22 @@
 				<div class="d-flex justify-content-around space">
 					<div class="boxSize ">
 						<p class="white textCenter bg-dark">Tickets by Priority</p>
+						<ul>
+							<c:forEach var="ticket" items="${tickets}">
+								<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
+							</c:forEach>
+							<c:forEach var="ticket" items="${partneredTickets}">
+								<c:choose>
+									<c:when test = "${ticket.project.poster.id == ticket.poster.id}">
+									<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
+									</c:when>
+									<c:otherwise>
+									<!-- display nothing if project belongs to poster -->
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</ul>
+
 					</div>
 					<div class="boxSize ">
 						<p class="white textCenter bg-dark">Tickets by Type</p>

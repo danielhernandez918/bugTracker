@@ -10,7 +10,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>My Projects</title>
+	<title>Manage Project Users</title>
 </head>
 <body class="full">
 	<div class="d-flex minHeight">
@@ -36,22 +36,24 @@
 					<p>User Actions</p>
 				</div>
 			</div>
-			<div class=" form-control minHeight mx-2 my-2">
-				<div class="d-flex justify-content-between">
-					<h1>Projects</h1> 
-					<a href="/project/new"><button class="black textCenter px-2">New Project</button></a>
-				</div>
-				<h3>Lead Projects</h3>
+			<div class="form-control minHeight mx-2 my-2">
+                <h1>Add ${partner.userName} to Projects</h1>
                 <ul>
-					<c:forEach var="project" items="${projects}">
-						<a href="/project/${project.id}"><li>${project.title}</li></a>
-					</c:forEach>
-				</ul>
-				<h3>Partnered Projects</h3>
-				<ul>
-					<c:forEach var="project" items="${assignedProjects}">
-						<a href="/project/${project.id}"><li>${project.title}</li></a>
-					</c:forEach>
+                    <form action="/manageUsers/${partner.id}" method="post" >
+                        <select name="projectId" id="projectId" >
+                                <c:forEach var="project" items="${unassignedProjects}">
+                                    <c:choose>
+                                        <c:when test = "${userId == project.poster.id}">
+                                            <option value ="${project.id}" >${project.title}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                        <!-- display nothing if project belongs to poster -->
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                        </select>
+                        <input class="px-2" type="submit" value="Add Project"/>
+                    </form>
                 </ul>
 			</div>
 		</div>

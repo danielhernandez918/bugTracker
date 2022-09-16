@@ -63,9 +63,6 @@
 						</div> -->
 						<input type="submit" value="Update"/>
 					</form:form>
-					
-                    <li><a href="/profile/${userId}/view">View Profile</a></li>
-                    <li><a href="/profile/${userId}/edit">EditProfile</a></li>
                 </ul>
 			</div>
 		</div>

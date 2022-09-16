@@ -46,22 +46,21 @@ public class ProjectController {
     		return "redirect:/";
     	}
     	Long userId = (Long) session.getAttribute("userId");
-
         List<Project> projects = projectService.findProjectByPoster(userId);
         model.addAttribute("projects", projects);
     	List<User> users = userService.allUsers();
     	model.addAttribute("users", users);
     	User user = userService.findUser(userId);
 		model.addAttribute("assignedProjects", projectService.getAssignedPartners(user));
-		model.addAttribute("unassignedprojects", projectService.getUnassignedPartners(user));
+//		model.addAttribute("unassignedprojects", projectService.getUnassignedPartners(user));
         return "projects.jsp";
     }
 	 
     @GetMapping("/project/new")
 	public String newProject(@ModelAttribute("project") Project project, HttpSession session){
-	//	if(session.getAttribute("userId")==null) {
-	//		return "redirect:/";
-	//	}
+		if(session.getAttribute("userId")==null) {
+			return "redirect:/";
+		}
 	return "newProject.jsp";
 	}
     
@@ -107,24 +106,4 @@ public class ProjectController {
 		return "redirect:/project/" + projectId;
     	
     }
-//    
-//    @GetMapping("/manageRole")
-//    public String roles (){
-//        return "manageRole.jsp";
-//    }
-//    
-//    @GetMapping("/manageUsers")
-//    public String users(){
-//        return "manageUsers.jsp";
-//    }
-//    
-//    @GetMapping("/projects")
-//    public String projects(){
-//        return "projects.jsp";
-//    }
-//    
-//    @GetMapping("/tickets")
-//    public String tickets(){
-//        return "tickets.jsp";
-//    }
 }

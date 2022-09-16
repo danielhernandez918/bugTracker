@@ -25,8 +25,8 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min = 5, max = 200, message="Project name must be at least 5 characters.")
-    private String project;
+//    @Size(min = 5, max = 200, message="Project name must be at least 5 characters.")
+//    private String project;
     @NotNull
     @Size(min = 5, max = 200, message="Description must be at least 5 characters and less than 200.")
     private String description;
@@ -38,6 +38,11 @@ public class Ticket {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="poster_id")
     private User poster;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="project_id")
+    private Project project;
+	
     
     // This will not allow the createdAt column to be updated after creation
     @Column(updatable=false)
@@ -48,10 +53,10 @@ public class Ticket {
     
     public Ticket() {
     }
-//    public Ticket(String project, User poster) {
-//        this.project = project;
-//        this.poster = poster;
-//    }
+    public Ticket(Project project, User poster) {
+        this.project = project;
+        this.poster = poster;
+    }
     
     public Long getId() {
 		return id;
@@ -59,16 +64,25 @@ public class Ticket {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getProject() {
+//	public String getProject() {
+//		return project;
+//	}
+//	public void setProject(String project) {
+//		this.project = project;
+//	}
+	
+	public Project getProject() {
 		return project;
 	}
-	public void setProject(String project) {
+
+	public void setProject(Project project) {
 		this.project = project;
 	}
 	
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}

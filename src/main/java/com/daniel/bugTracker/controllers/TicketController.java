@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,8 +27,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.daniel.bugTracker.models.Project;
 import com.daniel.bugTracker.models.Ticket;
+import com.daniel.bugTracker.models.User;
+import com.daniel.bugTracker.services.ProjectService;
 import com.daniel.bugTracker.services.TicketService;
+import com.daniel.bugTracker.services.UserService;
 
 @Controller
 public class TicketController {
@@ -35,11 +40,23 @@ public class TicketController {
 	 @Autowired 
 	 TicketService ticketService;
 	 
+	 @Autowired 
+	 ProjectService projectService;
+	 
+	 @Autowired 
+	 UserService userService;
+	 
     @GetMapping("/ticket/new")
-	public String newTicket(@ModelAttribute("ticket") Ticket ticket, HttpSession session){
+	public String newTicket(Model model, @ModelAttribute("ticket") Ticket ticket, HttpSession session){
 		if(session.getAttribute("userId")==null) {
 			return "redirect:/";
 		}
+    	Long userId = (Long) session.getAttribute("userId");
+        List<Project> projects = projectService.findProjectByPoster(userId);
+        model.addAttribute("projects", projects);
+    	User user = userService.findUser(userId);
+		model.addAttribute("assignedProjects", projectService.getAssignedPartners(user));
+		
 	return "newTicket.jsp";
 	}
     
@@ -52,6 +69,19 @@ public class TicketController {
         List<Ticket> tickets = ticketService.findTicketByPoster(userId);
         Collections.reverse(tickets);
         model.addAttribute("tickets", tickets);
+        User user = userService.findUser(userId);
+        List<Project> assignedProjects = projectService.getAssignedPartners(user);	
+        List<Ticket> allTickets = ticketService.allTickets();
+        List<Ticket> partneredTickets = new ArrayList();
+        for(Project project:assignedProjects) {
+        	for(Ticket ticket:allTickets) {
+            	if(project.getId() == ticket.getProject().getId()) {
+            		partneredTickets.add(ticket);
+            	}
+        	}
+        }
+        Collections.reverse(partneredTickets);
+        model.addAttribute("partneredTickets", partneredTickets);
 		return "tickets.jsp";
     }
     
@@ -87,25 +117,4 @@ public class TicketController {
     		return "redirect:/tickets";
     	}
     }
-	 
-//    
-//    @GetMapping("/manageRole")
-//    public String roles (){
-//        return "manageRole.jsp";
-//    }
-//    
-//    @GetMapping("/manageUsers")
-//    public String users(){
-//        return "manageUsers.jsp";
-//    }
-//    
-//    @GetMapping("/projects")
-//    public String projects(){
-//        return "projects.jsp";
-//    }
-//    
-//    @GetMapping("/tickets")
-//    public String tickets(){
-//        return "tickets.jsp";
-//    }
 }
