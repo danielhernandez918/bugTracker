@@ -53,21 +53,22 @@ public class MainController {
     	}
     	Long userId = (Long) session.getAttribute("userId");
         List<Ticket> tickets = ticketService.findTicketByPoster(userId);
-        Collections.reverse(tickets);
-        model.addAttribute("tickets", tickets);
+//        Collections.reverse(tickets);
+//        model.addAttribute("tickets", tickets);
         User user = userService.findUser(userId);
         List<Project> assignedProjects = projectService.getAssignedPartners(user);	
         List<Ticket> allTickets = ticketService.allTickets();
-        List<Ticket> partneredTickets = new ArrayList();
+//        List<Ticket> partneredTickets = new ArrayList();
         for(Project project:assignedProjects) {
         	for(Ticket ticket:allTickets) {
             	if(project.getId() == ticket.getProject().getId()) {
-            		partneredTickets.add(ticket);
+            		tickets.add(ticket);
             	}
         	}
         }
-        Collections.reverse(partneredTickets);
-        model.addAttribute("partneredTickets", partneredTickets);
+//        Collections.reverse(partneredTickets);
+        model.addAttribute("tickets", tickets);
+//        model.addAttribute("partneredTickets", partneredTickets);
         return "home.jsp";
     }
     

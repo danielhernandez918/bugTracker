@@ -42,9 +42,6 @@
                     <li>sdf</li>
                     <li>sdf</li>
                     <li>sdf</li>
-                    <li>sdf</li>
-                    <li>sdf</li>
-                    <li>sdf</li>
                 </ul>
 			</div>
 		</div>

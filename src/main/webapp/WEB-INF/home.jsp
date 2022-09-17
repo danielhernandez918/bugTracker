@@ -42,15 +42,18 @@
 						<p class="white textCenter bg-dark">Tickets by Priority</p>
 						<ul>
 							<c:forEach var="ticket" items="${tickets}">
-								<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
-							</c:forEach>
-							<c:forEach var="ticket" items="${partneredTickets}">
 								<c:choose>
-									<c:when test = "${ticket.project.poster.id == ticket.poster.id}">
-									<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
+									<c:when test = "${ticket.priority=='High' && ticket.status == 'Open'}">
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
+									</c:when>
+									<c:when test = "${ticket.priority=='Medium' && ticket.status == 'Open'}">
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
+									</c:when>
+									<c:when test = "${ticket.priority=='Low' && ticket.status == 'Open'}">
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
 									</c:when>
 									<c:otherwise>
-									<!-- display nothing if project belongs to poster -->
+									<!-- display nothing if ticket is closed-->
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
