@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 //import java.util.ArrayList;
@@ -66,6 +67,7 @@ public class MainController {
             	}
         	}
         }
+        Collections.sort(tickets, (o1, o2) -> (o1.getPriority().compareTo(o2.getPriority())));
 //        Collections.reverse(partneredTickets);
         model.addAttribute("tickets", tickets);
 //        model.addAttribute("partneredTickets", partneredTickets);

@@ -33,6 +33,8 @@ public class Ticket {
     @NotNull
     private String priority;
     
+    private int priorityNum;
+    
     private String status;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -53,7 +55,7 @@ public class Ticket {
     
     public Ticket() {
     }
-    public Ticket(Project project, User poster) {
+    public Ticket(Project project, User poster, String Priority) {
         this.project = project;
         this.poster = poster;
     }
@@ -64,12 +66,6 @@ public class Ticket {
 	public void setId(Long id) {
 		this.id = id;
 	}
-//	public String getProject() {
-//		return project;
-//	}
-//	public void setProject(String project) {
-//		this.project = project;
-//	}
 	
 	public Project getProject() {
 		return project;
@@ -129,4 +125,12 @@ public class Ticket {
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
+	public int getPriorityNum() {
+		return priorityNum;
+	}
+	public void setPriorityNum(int priorityNum) {
+		this.priorityNum = priorityNum;
+	}
+	
+	
 }

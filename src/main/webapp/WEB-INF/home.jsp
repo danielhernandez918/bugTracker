@@ -43,15 +43,10 @@
 						<ul>
 							<c:forEach var="ticket" items="${tickets}">
 								<c:choose>
-									<c:when test = "${ticket.priority=='High' && ticket.status == 'Open'}">
+									<c:when test = "${ticket.status == 'Open'}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
 									</c:when>
-									<c:when test = "${ticket.priority=='Medium' && ticket.status == 'Open'}">
-										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
-									</c:when>
-									<c:when test = "${ticket.priority=='Low' && ticket.status == 'Open'}">
-										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
-									</c:when>
+	
 									<c:otherwise>
 									<!-- display nothing if ticket is closed-->
 									</c:otherwise>
@@ -66,7 +61,25 @@
 				</div>
 				<div class="d-flex justify-content-around space">
 					<div class="boxSize ">
-						<p class="white textCenter bg-dark">Tickets Progress</p>
+						<p class="white textCenter bg-dark">Closed Tickets</p>
+						<ul>
+							<c:forEach var="ticket" items="${tickets}">
+								<c:choose>
+									<c:when test = "${ticket.priority=='High' && ticket.status == 'Close'}">
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
+									</c:when>
+									<c:when test = "${ticket.priority=='Medium' && ticket.status == 'Close'}">
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
+									</c:when>
+									<c:when test = "${ticket.priority=='Low' && ticket.status == 'Close'}">
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
+									</c:when>
+									<c:otherwise>
+									<!-- display nothing if ticket is closed-->
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</ul>
 					</div>
 					<div class="boxSize ">
 						<p class="white textCenter bg-dark">Tickets by User</p>

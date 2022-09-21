@@ -59,10 +59,10 @@
                     </p>
                     <div class="form-group my-3">
                         <form:label class="bold" path="priority">Priority Level:</form:label>
-                        <form:select path="priority" >
-                            <form:option value="High">High</form:option>
-                            <form:option value="Medium">Medium</form:option>
-                            <form:option value="Low">Low</form:option>
+                        <form:select path="priority">
+                            <form:option value="High" >  High</form:option>
+                            <form:option value="Medium" >Medium</form:option>
+                            <form:option value="Low" >Low</form:option>
                         </form:select>
                     </div>
                     <input type="submit" value="Submit"/>	
