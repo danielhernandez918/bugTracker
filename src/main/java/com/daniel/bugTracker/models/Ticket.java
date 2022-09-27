@@ -31,7 +31,7 @@ public class Ticket {
     @Size(min = 5, max = 200, message="Description must be at least 5 characters and less than 200.")
     private String description;
     @NotNull
-    private String priority;
+//    private String priority;
     
     private int priorityNum;
     
@@ -83,12 +83,12 @@ public class Ticket {
 		this.description = description;
 	}
 	
-    public String getPriority() {
-		return priority;
-	}
-	public void setPriority(String priority) {
-		this.priority = priority;
-	}
+//    public String getPriority() {
+//		return priority;
+//	}
+//	public void setPriority(String priority) {
+//		this.priority = priority;
+//	}
 	
 	
 	public String getStatus() {

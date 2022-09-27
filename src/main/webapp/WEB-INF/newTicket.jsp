@@ -42,7 +42,7 @@
                 <form:hidden path="status" value="Open" />
                 <form:errors path="poster" style="color: red"/>
                     <p class="form-group d-flex align-items-center">
-                        <form:label class="bold " path="project">Title: </form:label>
+                        <form:label class="bold " path="project">Project Title: </form:label>
                         <form:select class="form-control" path="project">
                         <c:forEach var="p" items="${projects}">
 							<form:option value="${p.id}">${p.title}</form:option>
@@ -58,11 +58,11 @@
                         <form:errors path="description" style="color: red"/>
                     </p>
                     <div class="form-group my-3">
-                        <form:label class="bold" path="priority">Priority Level:</form:label>
-                        <form:select path="priority">
-                            <form:option value="High" >  High</form:option>
-                            <form:option value="Medium" >Medium</form:option>
-                            <form:option value="Low" >Low</form:option>
+                        <form:label class="bold" path="priorityNum">Priority Level:</form:label>
+                        <form:select path="priorityNum">
+                            <form:option value="1" >  High</form:option>
+                            <form:option value="2" >Medium</form:option>
+                            <form:option value="3" >Low</form:option>
                         </form:select>
                     </div>
                     <input type="submit" value="Submit"/>	

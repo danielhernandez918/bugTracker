@@ -42,24 +42,48 @@
 					<a href="/ticket/new"><button class="black textCenter px-2">New Ticket</button></a>
 				</div>
 				<h3>My Tickets</h3>
-                <ul>
-					<c:forEach var="ticket" items="${tickets}">
-						<a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
-					</c:forEach>
-				</ul>
+				<c:choose>
+					<c:when test = "${empty tickets}">
+						<p>No Tickets</p>
+					</c:when>
+					<c:otherwise>
+						<ul>
+							<c:forEach var="ticket" items="${tickets}">
+								<c:choose>
+									<c:when test="${ticket.priorityNum == 1}">
+										<a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority High - Status ${ticket.status}</li></a>
+									</c:when>
+									<c:when test="${ticket.priorityNum == 2}">
+										<a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority Medium - Status ${ticket.status}</li></a>
+									</c:when>
+									<c:otherwise>
+										<a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority Low - Status ${ticket.status}</li></a>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</ul>
+					</c:otherwise>
+				</c:choose>
 				<h3>Partner Tickets</h3>
-				<ul>
-					<c:forEach var="ticket" items="${partneredTickets}">
-						<c:choose>
-							<c:when test = "${ticket.project.poster.id == ticket.poster.id}">
-							<a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority ${ticket.priority} - Status ${ticket.status}</li></a>
-							</c:when>
-							<c:otherwise>
-							<!-- display nothing if project belongs to poster -->
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-                </ul>
+				<c:choose>
+					<c:when test = "${empty partneredTickets}">
+						<p>No Partnered Tickets</p>
+					</c:when>
+					<c:otherwise>
+						<ul>
+							<c:forEach var="ticket" items="${partneredTickets}">
+								<c:choose>
+									<c:when test = "${ticket.project.poster.id == ticket.poster.id}">
+									<a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority ${ticket.priorityNum} - Status ${ticket.status}</li></a>
+									</c:when>
+									<c:otherwise>
+									<!-- display nothing if project belongs to poster -->
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</ul>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>

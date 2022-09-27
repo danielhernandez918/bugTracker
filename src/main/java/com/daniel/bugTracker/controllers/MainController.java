@@ -54,23 +54,45 @@ public class MainController {
     	}
     	Long userId = (Long) session.getAttribute("userId");
         List<Ticket> tickets = ticketService.findTicketByPoster(userId);
-//        Collections.reverse(tickets);
-//        model.addAttribute("tickets", tickets);
         User user = userService.findUser(userId);
         List<Project> assignedProjects = projectService.getAssignedPartners(user);	
         List<Ticket> allTickets = ticketService.allTickets();
-//        List<Ticket> partneredTickets = new ArrayList();
+        //project Id and and ticket project id need to match for partnered tickets to be added to tickets list
         for(Project project:assignedProjects) {
         	for(Ticket ticket:allTickets) {
-            	if(project.getId() == ticket.getProject().getId()) {
+            	if(project.getId() == ticket.getProject().getId() && !tickets.contains(ticket)) {
             		tickets.add(ticket);
             	}
         	}
         }
-        Collections.sort(tickets, (o1, o2) -> (o1.getPriority().compareTo(o2.getPriority())));
-//        Collections.reverse(partneredTickets);
+        Collections.sort(tickets, new Comparator<Ticket>() {
+	        public int compare(Ticket o1, Ticket o2) {
+	            if (o1.getPriorityNum() == o2.getPriorityNum()) {
+	                return 0;
+	            }
+	            else if (o1.getPriorityNum() < o2.getPriorityNum()) {
+	                return -1;
+	            }
+	            return 1;
+	        }
+	    });
         model.addAttribute("tickets", tickets);
-//        model.addAttribute("partneredTickets", partneredTickets);
+        //list to compare users tickets
+        List<Ticket> userTickets = new ArrayList<>(tickets);
+        // can compare by userId or userName
+//        Collections.sort(userTickets, new Comparator<Ticket>() {
+//	        public int compare(Ticket o1, Ticket o2) {
+//	            if (o1.getPoster().getId() == o2.getPoster().getId()) {
+//	                return 0;
+//	            }
+//	            else if (o1.getPoster().getId() < o2.getPoster().getId()) {
+//	                return -1;
+//	            }
+//	            return 1;
+//	        }
+//	    });
+      Collections.sort(userTickets, (o1, o2) -> (o1.getPoster().getUserName().compareTo(o2.getPoster().getUserName())));
+        model.addAttribute("userTickets", userTickets);
         return "home.jsp";
     }
     

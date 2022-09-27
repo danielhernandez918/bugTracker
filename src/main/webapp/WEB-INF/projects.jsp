@@ -42,17 +42,32 @@
 					<a href="/project/new"><button class="black textCenter px-2">New Project</button></a>
 				</div>
 				<h3>Lead Projects</h3>
-                <ul>
-					<c:forEach var="project" items="${projects}">
-						<a href="/project/${project.id}"><li>${project.title}</li></a>
-					</c:forEach>
-				</ul>
+				<c:choose>
+					<c:when test = "${empty projects}">
+						<p>No Projects</p>
+					</c:when>
+					<c:otherwise>
+						<ul>
+							<c:forEach var="project" items="${projects}">
+								<a href="/project/${project.id}"><li>${project.title}</li></a>
+							</c:forEach>
+						</ul>
+					</c:otherwise>
+				</c:choose>
 				<h3>Partnered Projects</h3>
-				<ul>
-					<c:forEach var="project" items="${assignedProjects}">
-						<a href="/project/${project.id}"><li>${project.title}</li></a>
-					</c:forEach>
-                </ul>
+				<c:choose>
+					<c:when test = "${empty assignedProjects}">
+						<p>No Partnered Projects</p>
+					</c:when>
+					<c:otherwise>
+						<ul>
+							<c:forEach var="project" items="${assignedProjects}">
+								<a href="/project/${project.id}"><li>${project.title}</li></a>
+							</c:forEach>
+						</ul>
+					</c:otherwise>
+				</c:choose>
+
 			</div>
 		</div>
 	</div>

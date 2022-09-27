@@ -37,7 +37,17 @@
 				</div>
 			</div>
             <div class="form-control minHeight mx-2 my-2">
-                <h1>${ticket.project.title} : ${ticket.priority} Priority</h1>
+				<c:choose>
+					<c:when test="${ticket.priorityNum == 1}">
+						<h1>${ticket.project.title} : High Priority</h1>
+					</c:when>
+					<c:when test="${ticket.priorityNum == 2}">
+						<h1>${ticket.project.title} : Medium Priority</h1>
+					</c:when>
+					<c:otherwise>
+						<h1>${ticket.project.title} : Low Priority</h1>
+					</c:otherwise>
+				</c:choose>
                 <h3>${ticket.description}</h3>
                 <p>Ticket by ${ticket.poster.userName}</p>
                 <p>Status ${ticket.status}</p>
@@ -47,14 +57,12 @@
                         <form:hidden path="project" value="${ticket.project.id}" />
                         <form:hidden path="poster" value="${ticket.poster.id}" />
                         <form:hidden path="description" value="${ticket.description}" />
-                        <form:hidden path="priority" value="${ticket.priority}" />
+                        <form:hidden path="priorityNum" value="${ticket.priorityNum}" />
                         <form:hidden path="status" value="Close" />
                         <form:errors path="status" style="color: red"/>
-                        <form:errors path="priority" style="color: red"/>
+                        <form:errors path="priorityNum" style="color: red"/>
                         <form:errors path="description" style="color: red"/>
                         <form:errors path="poster" style="color: red"/>
-
-
                         <input class="px-2" type="submit" value="Close Ticket"/>
                     </form:form>
                 </c:if>
