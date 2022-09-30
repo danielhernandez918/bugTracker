@@ -14,7 +14,7 @@
 </head>
 <body class="full">
 	<div class="d-flex minHeight">
-		<div class="d-flex flex-column col-2 borderShadow">
+		<div class="sideBar col-2">
 			<div class="d-flex align-items-center">
 				<img class="logo mx-2" src="/image/OH.png" alt="logoPic">
 				<h1 class="text-center">Welcome Bro!</h1>
@@ -28,8 +28,8 @@
 			<a class="black textCenter" href="/logout">Logout</a>
 		</div>
 		<div class="col-10">
-            <div class="d-flex justify-content-between align-items-center borderShadow">
-				<h1 class="mx-2">Logged in as: Admin</h1>
+            <div class="topBar">
+				<h1 class="mx-2">Logged in as: ${userName}</h1>
 				<div class="d-flex mx-2">
 					<p>Search</p>
 					<p>Notifcations</p>

@@ -33,9 +33,14 @@ public class Ticket {
     @NotNull
 //    private String priority;
     
+    @NotNull
     private int priorityNum;
     
+    @NotNull
     private String status;
+    
+    @NotNull
+    private String type;
 
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="poster_id")
@@ -83,14 +88,6 @@ public class Ticket {
 		this.description = description;
 	}
 	
-//    public String getPriority() {
-//		return priority;
-//	}
-//	public void setPriority(String priority) {
-//		this.priority = priority;
-//	}
-	
-	
 	public String getStatus() {
 		return status;
 	}
@@ -131,6 +128,13 @@ public class Ticket {
 	public void setPriorityNum(int priorityNum) {
 		this.priorityNum = priorityNum;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	
 	
 }

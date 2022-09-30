@@ -91,9 +91,13 @@ public class MainController {
 //	            return 1;
 //	        }
 //	    });
-      Collections.sort(userTickets, (o1, o2) -> (o1.getPoster().getUserName().compareTo(o2.getPoster().getUserName())));
-        model.addAttribute("userTickets", userTickets);
-        return "home.jsp";
+        Collections.sort(userTickets, (o1, o2) -> (o1.getPoster().getUserName().compareTo(o2.getPoster().getUserName())));
+	    model.addAttribute("userTickets", userTickets);
+	    //list to compare types of tickets
+	    List<Ticket> typeTickets = new ArrayList<>(tickets);
+	    Collections.sort(typeTickets, (o1, o2) -> (o1.getType().compareTo(o2.getType())));
+	    model.addAttribute("typeTickets", typeTickets);
+	    return "home.jsp";
     }
     
     @GetMapping("/manageRole")

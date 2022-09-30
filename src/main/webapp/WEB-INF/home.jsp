@@ -14,7 +14,7 @@
 </head>
 <body class="full">
 	<div class="d-flex minHeight">
-		<div class="d-flex flex-column col-2 borderShadow">
+		<div class="sideBar col-2">
 			<div class="d-flex align-items-center">
 				<img class="logo mx-2" src="/image/OH.png" alt="logoPic">
 				<h1 class="text-center">Welcome Bro!</h1>
@@ -28,8 +28,8 @@
 			<a class="black textCenter" href="/logout">Logout</a>
 		</div>
 		<div class="col-10">
-			<div class="d-flex justify-content-between align-items-center borderShadow">
-				<h1 class="mx-2">Logged in as: Admin</h1>
+			<div class="topBar">
+				<h1 class="mx-2">Logged in as: ${userName}</h1>
 				<div class="d-flex mx-2">
 					<p>Search</p>
 					<p>Notifcations</p>
@@ -44,13 +44,13 @@
 							<c:forEach var="ticket" items="${tickets}">
 								<c:choose>
 									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 1}">
-										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority High - Status ${ticket.status}</li></a>
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority High - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
 									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 2}">
-										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Medium - Status ${ticket.status}</li></a>
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Medium - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
 									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 3}">
-										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Low - Status ${ticket.status}</li></a>
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Low - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
 									<c:otherwise>
 									<!-- display nothing if ticket is closed-->
@@ -59,10 +59,28 @@
 							</c:forEach>
 							<a href="/tickets"><li class="noBullets">See All Tickets</li></a>
 						</ul>
-
 					</div>
 					<div class="boxSize ">
 						<p class="white textCenter bg-dark">Tickets by Type</p>
+						<ul>
+							<c:forEach var="ticket" items="${typeTickets}">
+								<c:choose>
+									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 1}">
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority High - Status ${ticket.status} - ${ticket.type} Issue</li></a>
+									</c:when>
+									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 2}">
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Medium - Status ${ticket.status} - ${ticket.type} Issue</li></a>
+									</c:when>
+									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 3}">
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Low - Status ${ticket.status} - ${ticket.type} Issue</li></a>
+									</c:when>
+									<c:otherwise>
+									<!-- display nothing if ticket is closed-->
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+							<a href="/tickets"><li class="noBullets">See All Tickets</li></a>
+						</ul>
 					</div>
 				</div>
 				<div class="d-flex justify-content-around space">
@@ -72,13 +90,13 @@
 							<c:forEach var="ticket" items="${tickets}">
 								<c:choose>
 									<c:when test = "${ticket.status == 'Close' && ticket.priorityNum == 1}">
-										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority High - Status ${ticket.status}</li></a>
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority High - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
 									<c:when test = "${ticket.status == 'Close' && ticket.priorityNum == 2}">
-										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Medium - Status ${ticket.status}</li></a>
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Medium - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
 									<c:when test = "${ticket.status == 'Close' && ticket.priorityNum == 3}">
-										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Low - Status ${ticket.status}</li></a>
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Low - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
 									<c:otherwise>
 									<!-- display nothing if ticket is closed-->
@@ -94,13 +112,13 @@
 							<c:forEach var="ticket" items="${userTickets}">
 								<c:choose>
 									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 1}">
-										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority High - Status ${ticket.status} - Poster ${ticket.poster.userName}</li></a>
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority High - Status ${ticket.status} - Posted by ${ticket.poster.userName}</li></a>
 									</c:when>
 									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 2}">
-										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Medium - Status ${ticket.status} - Poster ${ticket.poster.userName}</li></a>
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Medium - Status ${ticket.status} - Posted by ${ticket.poster.userName}</li></a>
 									</c:when>
 									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 3}">
-										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Low - Status ${ticket.status} - Poster ${ticket.poster.userName}</li></a>
+										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Low - Status ${ticket.status} - Posted by ${ticket.poster.userName}</li></a>
 									</c:when>
 									<c:otherwise>
 									<!-- display nothing if ticket is closed-->

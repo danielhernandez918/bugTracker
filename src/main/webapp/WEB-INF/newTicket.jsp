@@ -14,7 +14,7 @@
 </head>
 <body class="full">
 	<div class="d-flex minHeight">
-		<div class="d-flex flex-column col-2 borderShadow">
+		<div class="sideBar col-2">
 			<div class="d-flex align-items-center">
 				<img class="logo mx-2" src="/image/OH.png" alt="logoPic">
 				<h1 class="text-center">Welcome Bro!</h1>
@@ -28,8 +28,8 @@
             <a class="black textCenter" href="/logout">Logout</a>
 		</div>
 		<div class="col-10">
-			<div class="d-flex justify-content-between align-items-center borderShadow">
-				<h1 class="mx-2">Logged in as: Admin</h1>
+			<div class="topBar">
+				<h1 class="mx-2">Logged in as: ${userName}</h1>
 				<div class="d-flex mx-2">
 					<p>Search</p>
 					<p>Notifcations</p>
@@ -52,6 +52,16 @@
 						</c:forEach>
                         </form:select>
                     </p>
+					<div class="form-group my-3">
+                        <form:label class="bold" path="type">Type:</form:label>
+                        <form:select path="type">
+                            <form:option value="Front End" >UI/UX</form:option>
+							<form:option value="Back End" >Back End</form:option>
+                            <form:option value="Database" >Database</form:option>
+							<form:option value="Security" >Security</form:option>
+                            <form:option value="Other" >Other</form:option>
+                        </form:select>
+                    </div>
                     <p class="form-group d-flex align-items-center">
                         <form:label class="bold" path="description">Description: </form:label>
                         <form:textarea row="6" class="form-control" path="description"/>
