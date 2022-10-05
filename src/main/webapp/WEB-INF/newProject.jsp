@@ -14,10 +14,9 @@
 </head>
 <body class="full">
 	<div class="d-flex minHeight">
-		<div class="sideBar col-2">
-			<div class="d-flex align-items-center">
+		<div class="sideBar">
+			<div class="logoCenter">
 				<img class="logo mx-2" src="/image/OH.png" alt="logoPic">
-				<h1 class="text-center">Welcome Bro!</h1>
 			</div>
 			<a class="black textCenter" href="/home"> DashBoard Home</a>
 			<a class="black textCenter" href="/manageRole">Manage Role Assignment</a>
@@ -25,9 +24,9 @@
 			<a class="black textCenter" href="/projects">My Projects</a>
 			<a class="black textCenter" href="/tickets">My Tickets</a>
 			<a class="black textCenter" href="/profile">User Profile</a>
-            <a class="black textCenter" href="/logout">Logout</a>
+			<a class="black textCenter" href="/logout">Logout</a>
 		</div>
-		<div class="col-10">
+		<div class="top">
 			<div class="topBar">
 				<h1 class="mx-2">Logged in as: ${userName}</h1>
 				<div class="d-flex mx-2">

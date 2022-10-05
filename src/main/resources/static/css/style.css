@@ -42,7 +42,19 @@
 	flex-direction: column;
 	border-style: solid;
 	box-shadow: 2.5px 0px 10px;
+	width:25%
 }
+
+@media screen and (max-width: 900px) {
+	.sideBar {
+		
+	}
+}
+
+.top {
+	width:75%
+}
+
 
 .bold {
 	font-weight: bold;
@@ -55,7 +67,15 @@
 .black {
 	color: black;
 	text-decoration: none;
+	font-weight:bold;
 }
+
+@media screen and (max-width: 900px) {
+	.black {
+		font-weight:normal;
+	}
+}
+
 
 .printPadding {
 	padding: 5px;
@@ -76,6 +96,16 @@
 .textCenter{
 	text-align:center;
 	margin-left:1px;
+}
+
+.logoCenter {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.logo {
+	width:50%;
 }
 
 .bar {
@@ -117,9 +147,15 @@
 	border-radius: 10%;
 }
 
-.logo {
-	width:25%;
+@media screen and (max-width: 900px) {
+	.boxSize {
+	background-color: rgb(192, 192, 192);
+	height: 40rem;
+	width:45%;
+	border-radius: 10%;
+	}
 }
+
 
 .noBullets {
 	list-style-type: none; /* Remove bullets */
