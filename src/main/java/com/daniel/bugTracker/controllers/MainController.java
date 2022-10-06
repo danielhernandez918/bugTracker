@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 //import java.util.ArrayList;
 
@@ -53,19 +54,35 @@ public class MainController {
     		return "redirect:/";
     	}
     	Long userId = (Long) session.getAttribute("userId");
+    	//gets all tickets of logged in user
         List<Ticket> tickets = ticketService.findTicketByPoster(userId);
+        //seperate open and closed tickets of logged in user
+        List<Ticket> openTickets = new ArrayList<>();
+        for(Ticket ticket:tickets) {
+            if(ticket.getStatus().equals("Open")) {
+                openTickets.add(ticket);
+            }
+        }
+        List<Ticket> closeTickets = new ArrayList<>();
+        for(Ticket ticket:tickets) {
+            if(ticket.getStatus().equals("Close")) {
+                closeTickets.add(ticket);
+            }
+        }
+        //get tickets from other users part of team projects
         User user = userService.findUser(userId);
         List<Project> assignedProjects = projectService.getAssignedPartners(user);	
         List<Ticket> allTickets = ticketService.allTickets();
-        //project Id and and ticket project id need to match for partnered tickets to be added to tickets list
+        //project Id and and ticket project id need to match for partnered tickets to be added to tickets list and status be open
         for(Project project:assignedProjects) {
         	for(Ticket ticket:allTickets) {
-            	if(project.getId() == ticket.getProject().getId() && !tickets.contains(ticket)) {
-            		tickets.add(ticket);
+            	if(project.getId() == ticket.getProject().getId() && !openTickets.contains(ticket) && ticket.getStatus().equals("Open")) {
+            		openTickets.add(ticket);
             	}
         	}
         }
-        Collections.sort(tickets, new Comparator<Ticket>() {
+        //sort by priority
+        Collections.sort(openTickets, new Comparator<Ticket>() {
 	        public int compare(Ticket o1, Ticket o2) {
 	            if (o1.getPriorityNum() == o2.getPriorityNum()) {
 	                return 0;
@@ -76,27 +93,54 @@ public class MainController {
 	            return 1;
 	        }
 	    });
-        model.addAttribute("tickets", tickets);
+        List<Ticket> openTicketsCap = openTickets.stream().limit(6).collect(Collectors.toList());
+        model.addAttribute("tickets", openTicketsCap);
+        //add closed tickets from partners
+        for(Project project:assignedProjects) {
+            for(Ticket ticket:allTickets) {
+                if(project.getId() == ticket.getProject().getId() && !closeTickets.contains(ticket) && ticket.getStatus().equals("Close")) {
+                    closeTickets.add(ticket);
+                }
+            }
+        }
+        
+        //find way to compare updated dates for closed box
+//        Collections.sort(closeTickets, new Comparator<Ticket>() {
+//            public  compare(Ticket o1, Ticket o2) {
+//                if (o1.getUpdatedAt() == o2.getUpdatedAt()) {
+//                    return 0;
+//                }
+//                else if (o1.getUpdatedAt() < o2.getUpdatedAt()) {
+//                    return -1;
+//                }
+//                return 1;
+//            }
+//        });
+        List<Ticket> closeTicketsCap = closeTickets.stream().limit(6).collect(Collectors.toList());
+        model.addAttribute("closeTickets", closeTicketsCap);
+        
         //list to compare users tickets
-        List<Ticket> userTickets = new ArrayList<>(tickets);
+        List<Ticket> userTickets = new ArrayList<>(openTickets);
         // can compare by userId or userName
-//        Collections.sort(userTickets, new Comparator<Ticket>() {
-//	        public int compare(Ticket o1, Ticket o2) {
-//	            if (o1.getPoster().getId() == o2.getPoster().getId()) {
-//	                return 0;
-//	            }
-//	            else if (o1.getPoster().getId() < o2.getPoster().getId()) {
-//	                return -1;
-//	            }
-//	            return 1;
-//	        }
-//	    });
+        //        Collections.sort(userTickets, new Comparator<Ticket>() {
+        //	        public int compare(Ticket o1, Ticket o2) {
+        //	            if (o1.getPoster().getId() == o2.getPoster().getId()) {
+        //	                return 0;
+        //	            }
+        //	            else if (o1.getPoster().getId() < o2.getPoster().getId()) {
+        //	                return -1;
+        //	            }
+        //	            return 1;
+        //	        }
+        //	    });
         Collections.sort(userTickets, (o1, o2) -> (o1.getPoster().getUserName().compareTo(o2.getPoster().getUserName())));
-	    model.addAttribute("userTickets", userTickets);
+        List<Ticket> userTicketsCap = userTickets.stream().limit(6).collect(Collectors.toList());
+	    model.addAttribute("userTickets", userTicketsCap);
 	    //list to compare types of tickets
-	    List<Ticket> typeTickets = new ArrayList<>(tickets);
+	    List<Ticket> typeTickets = new ArrayList<>(openTickets);
 	    Collections.sort(typeTickets, (o1, o2) -> (o1.getType().compareTo(o2.getType())));
-	    model.addAttribute("typeTickets", typeTickets);
+	    List<Ticket> typeTicketsCap = typeTickets.stream().limit(6).collect(Collectors.toList());
+	    model.addAttribute("typeTickets", typeTicketsCap);
 	    return "home.jsp";
     }
     

@@ -42,13 +42,13 @@
 						<ul>
 							<c:forEach var="ticket" items="${tickets}">
 								<c:choose>
-									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 1}">
+									<c:when test = "${ticket.priorityNum == 1}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority High - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
-									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 2}">
+									<c:when test = "${ticket.priorityNum == 2}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Medium - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
-									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 3}">
+									<c:when test = "${ticket.priorityNum == 3}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Low - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
 									<c:otherwise>
@@ -64,13 +64,13 @@
 						<ul>
 							<c:forEach var="ticket" items="${typeTickets}">
 								<c:choose>
-									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 1}">
+									<c:when test = "${ticket.priorityNum == 1}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority High - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
-									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 2}">
+									<c:when test = "${ticket.priorityNum == 2}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Medium - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
-									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 3}">
+									<c:when test = "${ticket.priorityNum == 3}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Low - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
 									<c:otherwise>
@@ -86,15 +86,15 @@
 					<div class="boxSize ">
 						<p class="white textCenter bg-dark">Closed Tickets</p>
 						<ul>
-							<c:forEach var="ticket" items="${tickets}">
+							<c:forEach var="ticket" items="${closeTickets}">
 								<c:choose>
-									<c:when test = "${ticket.status == 'Close' && ticket.priorityNum == 1}">
+									<c:when test = "${ticket.priorityNum == 1}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority High - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
-									<c:when test = "${ticket.status == 'Close' && ticket.priorityNum == 2}">
+									<c:when test = "${ticket.priorityNum == 2}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Medium - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
-									<c:when test = "${ticket.status == 'Close' && ticket.priorityNum == 3}">
+									<c:when test = "${ticket.priorityNum == 3}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Low - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
 									<c:otherwise>
@@ -110,13 +110,13 @@
 						<ul>
 							<c:forEach var="ticket" items="${userTickets}">
 								<c:choose>
-									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 1}">
+									<c:when test = "${ticket.priorityNum == 1}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority High - Status ${ticket.status} - Posted by ${ticket.poster.userName}</li></a>
 									</c:when>
-									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 2}">
+									<c:when test = "${ticket.priorityNum == 2}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Medium - Status ${ticket.status} - Posted by ${ticket.poster.userName}</li></a>
 									</c:when>
-									<c:when test = "${ticket.status == 'Open' && ticket.priorityNum == 3}">
+									<c:when test = "${ticket.priorityNum == 3}">
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Low - Status ${ticket.status} - Posted by ${ticket.poster.userName}</li></a>
 									</c:when>
 									<c:otherwise>

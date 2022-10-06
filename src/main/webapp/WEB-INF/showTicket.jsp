@@ -58,6 +58,7 @@
                         <form:hidden path="poster" value="${ticket.poster.id}" />
                         <form:hidden path="description" value="${ticket.description}" />
                         <form:hidden path="priorityNum" value="${ticket.priorityNum}" />
+						<form:hidden path="type" value="${ticket.type}" />
                         <form:hidden path="status" value="Close" />
                         <form:errors path="status" style="color: red"/>
                         <form:errors path="priorityNum" style="color: red"/>

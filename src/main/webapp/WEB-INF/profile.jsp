@@ -36,7 +36,7 @@
 				</div>
 			</div>
 			<div class="form-control minHeight mx-2 my-2">
-                <h1>Actions for ${userName}:</h1>
+                <h1>Profile info for ${userName}:</h1>
                 <ul>
 					<form:form action="/profile/${userId}/edit" method="post" modelAttribute="user">
 						<input type="hidden" name="_method" value="put" />
@@ -60,8 +60,9 @@
 							<form:password path="confirm" class="form-control"/>
 							<form:errors path="confirm" class="text-danger"/>
 						</div> -->
-						<input type="submit" value="Update"/>
+						<input class="px-2" type="submit" value="Update Name/Email"/>
 					</form:form>
+					<a href="/profile/passwordChange"> Change Password ?</a>
                 </ul>
 			</div>
 		</div>

@@ -27,6 +27,7 @@
 			<a class="black textCenter" href="/logout">Logout</a>
 		</div>
 		<div class="top">
+            <div class="topBar">
 				<h1 class="mx-2">Logged in as: ${userName}</h1>
 				<div class="d-flex mx-2">
 					<p>Search</p>
@@ -35,7 +36,7 @@
 				</div>
 			</div>
 			<div class="form-control minHeight mx-2 my-2">
-                <h1>Add ${partner.userName} to Projects</h1>
+                <h1>Add ${partner.userName} to Your Projects</h1>
                 <ul>
                     <form action="/manageUsers/${partner.id}" method="post" >
                         <select name="projectId" id="projectId" >
