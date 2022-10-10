@@ -85,6 +85,7 @@ public class UserController {
     
         return "redirect:/home";
     }
+    
    
     
     @GetMapping("/logout") 
@@ -109,16 +110,44 @@ public class UserController {
     
     @PutMapping(value="/profile/{id}/edit")
     public String update(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session) {
+        if(session.getAttribute("userId")==null) {
+            return "redirect:/";
+        }
     	if(result.hasErrors()) {
     		System.out.print(result);
     		return "profile.jsp";
     	}
     	else {
     		userServ.updateUser(user);
-//            session.setAttribute("userId", user.getId()); 
-//            session.setAttribute("userName", user.getUserName());
-    		return "redirect:/projects";
+    		return "redirect:/profile";
     	}
+    }
+    
+    @GetMapping("/profile/passwordChange") 
+    public String changePassword(Model model, HttpSession session) {
+        if(session.getAttribute("userId")==null) {
+            return "redirect:/";
+        }
+        Long userId = (Long) session.getAttribute("userId");
+        User user = userServ.findUser(userId);
+        model.addAttribute("user", user);
+         return "changePassword.jsp";
+    }
+    
+    @PutMapping("/profile/passwordChange/{id}")
+    public String updatePassword(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session) {
+        if(session.getAttribute("userId")==null) {
+            return "redirect:/";
+        }
+        userServ.updatePassword(user, result);
+        
+        if(result.hasErrors()) {
+            System.out.print(result);
+            return "changePassword.jsp";
+        }
+
+        return "redirect:/profile";
+
     }
     
     @RequestMapping("/manageUsers")

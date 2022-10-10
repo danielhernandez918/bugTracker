@@ -50,16 +50,9 @@
 							<form:input path="email" class="form-control"/>
 							<form:errors path="email" class="text-danger"/>
 						</div>
-						<!-- <div class="form-group">
-							<form:label class="bold" path="password"> Password</form:label>
-							<form:input path="password" class="form-control"/>
-							<form:errors path="password" class="text-danger"/>
-						</div> -->
-						<!-- <div class="form-group">
-							<form:label class="bold" path="confirm"> New Password</form:label>
-							<form:password path="confirm" class="form-control"/>
-							<form:errors path="confirm" class="text-danger"/>
-						</div> -->
+						<form:hidden path="password" value="${user.password}" />
+						<form:errors path="password" class="text-danger"/>
+
 						<input class="px-2" type="submit" value="Update Name/Email"/>
 					</form:form>
 					<a href="/profile/passwordChange"> Change Password ?</a>
