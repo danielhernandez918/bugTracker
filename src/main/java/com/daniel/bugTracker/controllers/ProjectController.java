@@ -96,7 +96,7 @@ public class ProjectController {
     		return "redirect:/";
     	}
     	//can do findUsertoAdd through service or here
-//    	projectService.findUsertoAdd(projectId, userId);
+    	//projectService.findUsertoAdd(projectId, userId);
     	Project project = projectService.findProject(projectId);
     	User partner = userService.findUser(userId);
     	project.getPartners().add(partner);

@@ -12,19 +12,19 @@
 	<meta charset="UTF-8">
 	<title>Tickets</title>
 </head>
-<body class="full">
-	<div class="d-flex minHeight">
+<body class="minHeight">
+	<div class="d-flex ">
 		<div class="sideBar">
 			<div class="logoCenter">
 				<img class="logo mx-2" src="/image/OH.png" alt="logoPic">
 			</div>
-			<a class="black textCenter" href="/home"> DashBoard Home</a>
-			<a class="black textCenter" href="/manageRole">Manage Role Assignment</a>
-			<a class="black textCenter" href="/manageUsers">Manage Project Users</a>
-			<a class="black textCenter" href="/projects">My Projects</a>
-			<a class="black textCenter" href="/tickets">My Tickets</a>
-			<a class="black textCenter" href="/profile">User Profile</a>
-			<a class="black textCenter" href="/logout">Logout</a>
+			<h1 class="textCenter" ><a class="black" href="/home"> DashBoard Home</a></h1>
+			<!-- <a class="black textCenter" href="/manageRole">Manage Role Assignment</a> -->
+			<h1 class="textCenter" ><a class="black" href="/manageUsers">Manage Project Users</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/projects">My Projects</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/tickets">My Tickets</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/profile">User Profile</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/logout">Logout</a></h1>
 		</div>
 		<div class="top">
             <div class="topBar">
@@ -47,10 +47,10 @@
 						<h1>${ticket.project.title} : Low Priority</h1>
 					</c:otherwise>
 				</c:choose>
-				<h3>${ticket.type} Issue</h3>
-                <h3>${ticket.description}</h3>
-                <p>Ticket by ${ticket.poster.userName}</p>
-                <p>Status ${ticket.status}</p>
+				<h2>${ticket.type} Issue</h2>
+                <h2>Description: ${ticket.description}</h2>
+                <h4>Ticket by ${ticket.poster.userName}</h4>
+                <h4>Status ${ticket.status}</h4>
                 <c:if test="${ticket.status == 'Open'}">
                     <form:form action="/tickets/${ticket.id}/update" method="post" modelAttribute="ticket">
                         <input type="hidden" name="_method" value="put" />

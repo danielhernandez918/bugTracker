@@ -61,7 +61,6 @@ public class UserService {
 		    result.rejectValue("password", "Matches", "Invalid Password!");
 		}
 
-    
         // Return null if result has errors
 		if(result.hasErrors()) {
 			return null;
@@ -69,22 +68,6 @@ public class UserService {
 		return user;
 		
 	}
-	
-	   public User updatePassword(User user, BindingResult result ) {
-//	      1. check is password matches confirm
-	        if(!user.getPassword().equals(user.getConfirm())) {
-	            result.rejectValue("password","matches","The password and confirm password do not match");
-	        }
-//	      2. If result has errors
-	        if(result.hasErrors()) {
-	            return null;
-	        }
-//	      4. Hash and set password, save user to database
-	        String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-	        user.setPassword(hashed);
-	        return userRepo.save(user);
-	        
-	    }
 	
 	public List<User> allUsers() {
 		return userRepo.findAll();
@@ -101,13 +84,24 @@ public class UserService {
 	}
 	
 	public User updateUser(User user) {
-//		String userName = user.getUserName();
-//		String email = user.getEmail();
-//		user.setUserName(userName);
-//		user.setEmail(email);
-//		return user;
 	    return userRepo.save(user);
 	}
+	
+    public User updatePassword(User user, BindingResult result ) {
+//      1. check is password matches confirm
+          if(!user.getPassword().equals(user.getConfirm())) {
+              result.rejectValue("password","matches","The password and confirm password do not match");
+          }
+//      2. If result has errors
+          if(result.hasErrors()) {
+              return null;
+          }
+//      3. Hash and set password, save user to database
+          String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+          user.setPassword(hashed);
+          return userRepo.save(user);
+          
+      }
 	
 	public void deleteUser(Long id) {
 		userRepo.deleteById(id);

@@ -12,19 +12,19 @@
 	<meta charset="UTF-8">
 	<title>Tickets</title>
 </head>
-<body class="full">
-	<div class="d-flex minHeight">
+<body class="minHeight">
+	<div class="d-flex ">
 		<div class="sideBar">
 			<div class="logoCenter">
 				<img class="logo mx-2" src="/image/OH.png" alt="logoPic">
 			</div>
-			<a class="black textCenter" href="/home"> DashBoard Home</a>
-			<a class="black textCenter" href="/manageRole">Manage Role Assignment</a>
-			<a class="black textCenter" href="/manageUsers">Manage Project Users</a>
-			<a class="black textCenter" href="/projects">My Projects</a>
-			<a class="black textCenter" href="/tickets">My Tickets</a>
-			<a class="black textCenter" href="/profile">User Profile</a>
-			<a class="black textCenter" href="/logout">Logout</a>
+			<h1 class="textCenter" ><a class="black" href="/home"> DashBoard Home</a></h1>
+			<!-- <a class="black textCenter" href="/manageRole">Manage Role Assignment</a> -->
+			<h1 class="textCenter" ><a class="black" href="/manageUsers">Manage Project Users</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/projects">My Projects</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/tickets">My Tickets</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/profile">User Profile</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/logout">Logout</a></h1>
 		</div>
 		<div class="top">
 			<div class="topBar">
@@ -43,20 +43,20 @@
 				<h3>My Tickets</h3>
 				<c:choose>
 					<c:when test = "${empty tickets}">
-						<p>No Tickets</p>
+						<h3>No Tickets</h3>
 					</c:when>
 					<c:otherwise>
 						<ul>
 							<c:forEach var="ticket" items="${tickets}">
 								<c:choose>
 									<c:when test="${ticket.priorityNum == 1}">
-										<a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority High - Status ${ticket.status} - Ticket ${ticket.type}</li></a>
+										<h3><a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority High - Status ${ticket.status} - Ticket ${ticket.type}</li></a></h3>
 									</c:when>
 									<c:when test="${ticket.priorityNum == 2}">
-										<a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority Medium - Status ${ticket.status} - Ticket ${ticket.type}</li></a>
+										<h3><a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority Medium - Status ${ticket.status} - Ticket ${ticket.type}</li></a></h3>
 									</c:when>
 									<c:otherwise>
-										<a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority Low - Status ${ticket.status} - Ticket ${ticket.type}</li></a>
+										<h3><a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority Low - Status ${ticket.status} - Ticket ${ticket.type}</li></a></h3>
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -66,14 +66,14 @@
 				<h3>Partner Tickets</h3>
 				<c:choose>
 					<c:when test = "${empty partneredTickets}">
-						<p>No Partnered Tickets</p>
+						<h3>No Partnered Tickets</h3>
 					</c:when>
 					<c:otherwise>
 						<ul>
 							<c:forEach var="ticket" items="${partneredTickets}">
 								<c:choose>
 									<c:when test = "${ticket.project.poster.id == ticket.poster.id}">
-									<a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority ${ticket.priorityNum} - Status ${ticket.status} - Ticket ${ticket.type}</li></a>
+										<h3><a href="/tickets/${ticket.id}"><li>${ticket.project.title} - Priority ${ticket.priorityNum} - Status ${ticket.status} - Ticket ${ticket.type}</li></a></h3>
 									</c:when>
 									<c:otherwise>
 									<!-- display nothing if project belongs to poster -->

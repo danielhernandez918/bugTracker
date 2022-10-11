@@ -119,6 +119,7 @@ public class UserController {
     	}
     	else {
     		userServ.updateUser(user);
+            session.setAttribute("userName", user.getUserName());
     		return "redirect:/profile";
     	}
     }

@@ -12,19 +12,19 @@
 	<meta charset="UTF-8">
 	<title>My Projects</title>
 </head>
-<body class="full">
-	<div class="d-flex minHeight">
+<body class="minHeight">
+	<div class="d-flex ">
 		<div class="sideBar">
 			<div class="logoCenter">
 				<img class="logo mx-2" src="/image/OH.png" alt="logoPic">
 			</div>
-			<a class="black textCenter" href="/home"> DashBoard Home</a>
-			<a class="black textCenter" href="/manageRole">Manage Role Assignment</a>
-			<a class="black textCenter" href="/manageUsers">Manage Project Users</a>
-			<a class="black textCenter" href="/projects">My Projects</a>
-			<a class="black textCenter" href="/tickets">My Tickets</a>
-			<a class="black textCenter" href="/profile">User Profile</a>
-			<a class="black textCenter" href="/logout">Logout</a>
+			<h1 class="textCenter" ><a class="black" href="/home"> DashBoard Home</a></h1>
+			<!-- <a class="black textCenter" href="/manageRole">Manage Role Assignment</a> -->
+			<h1 class="textCenter" ><a class="black" href="/manageUsers">Manage Project Users</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/projects">My Projects</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/tickets">My Tickets</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/profile">User Profile</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/logout">Logout</a></h1>
 		</div>
 		<div class="top">
 			<div class="topBar">
@@ -43,12 +43,12 @@
 				<h3>Lead Projects</h3>
 				<c:choose>
 					<c:when test = "${empty projects}">
-						<p>No Projects</p>
+						<h3>No Projects</h3>
 					</c:when>
 					<c:otherwise>
 						<ul>
 							<c:forEach var="project" items="${projects}">
-								<a href="/project/${project.id}"><li>${project.title}</li></a>
+								<h3><a href="/project/${project.id}"><li>${project.title}</li></a></h3>
 							</c:forEach>
 						</ul>
 					</c:otherwise>
@@ -56,12 +56,12 @@
 				<h3>Partnered Projects</h3>
 				<c:choose>
 					<c:when test = "${empty assignedProjects}">
-						<p>No Partnered Projects</p>
+						<h3>No Partnered Projects</h3>
 					</c:when>
 					<c:otherwise>
 						<ul>
 							<c:forEach var="project" items="${assignedProjects}">
-								<a href="/project/${project.id}"><li>${project.title}</li></a>
+								<h3><a href="/project/${project.id}"><li>${project.title}</li></a></h3>
 							</c:forEach>
 						</ul>
 					</c:otherwise>

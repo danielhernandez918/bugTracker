@@ -12,19 +12,19 @@
 	<meta charset="UTF-8">
 	<title>Home</title>
 </head>
-<body class="full">
-	<div class="d-flex minHeight">
+<body class="minHeight">
+	<div class="d-flex ">
 		<div class="sideBar">
 			<div class="logoCenter">
 				<img class="logo mx-2" src="/image/OH.png" alt="logoPic">
 			</div>
-			<a class="black textCenter" href="/home"> DashBoard Home</a>
-			<a class="black textCenter" href="/manageRole">Manage Role Assignment</a>
-			<a class="black textCenter" href="/manageUsers">Manage Project Users</a>
-			<a class="black textCenter" href="/projects">My Projects</a>
-			<a class="black textCenter" href="/tickets">My Tickets</a>
-			<a class="black textCenter" href="/profile">User Profile</a>
-			<a class="black textCenter" href="/logout">Logout</a>
+			<h1 class="textCenter" ><a class="black" href="/home"> DashBoard Home</a></h1>
+			<!-- <a class="black textCenter" href="/manageRole">Manage Role Assignment</a> -->
+			<h1 class="textCenter" ><a class="black" href="/manageUsers">Manage Project Users</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/projects">My Projects</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/tickets">My Tickets</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/profile">User Profile</a></h1>
+			<h1 class="textCenter" ><a class="black" href="/logout">Logout</a></h1>
 		</div>
 		<div class="top">
 			<div class="topBar">
@@ -36,10 +36,10 @@
 				</div>
 			</div>
 			<div class="minHeight">
-				<div class="d-flex justify-content-around space">
+				<div class="upperGap">
 					<div class="boxSize ">
 						<p class="white textCenter bg-dark">Tickets by Priority</p>
-						<ul>
+						<ul class="ulSize">
 							<c:forEach var="ticket" items="${tickets}">
 								<c:choose>
 									<c:when test = "${ticket.priorityNum == 1}">
@@ -61,7 +61,7 @@
 					</div>
 					<div class="boxSize ">
 						<p class="white textCenter bg-dark">Tickets by Type</p>
-						<ul>
+						<ul class="ulSize">
 							<c:forEach var="ticket" items="${typeTickets}">
 								<c:choose>
 									<c:when test = "${ticket.priorityNum == 1}">
@@ -82,10 +82,10 @@
 						</ul>
 					</div>
 				</div>
-				<div class="d-flex justify-content-around space">
+				<div class="upperGap">
 					<div class="boxSize ">
 						<p class="white textCenter bg-dark">Closed Tickets</p>
-						<ul>
+						<ul class="ulSize">
 							<c:forEach var="ticket" items="${closeTickets}">
 								<c:choose>
 									<c:when test = "${ticket.priorityNum == 1}">
@@ -98,7 +98,7 @@
 										<a href="/tickets/${ticket.id}"><li class="noBullets">${ticket.project.title} - Priority Low - Status ${ticket.status} - ${ticket.type} Issue</li></a>
 									</c:when>
 									<c:otherwise>
-									<!-- display nothing if ticket is closed-->
+									<!-- display nothing if ticket is open-->
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -107,7 +107,7 @@
 					</div>
 					<div class="boxSize ">
 						<p class="white textCenter bg-dark">Tickets by User</p>
-						<ul>
+						<ul class="ulSize">
 							<c:forEach var="ticket" items="${userTickets}">
 								<c:choose>
 									<c:when test = "${ticket.priorityNum == 1}">
