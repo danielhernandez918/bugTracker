@@ -49,7 +49,7 @@
                         <form:textarea row="4" class="form-control" path="description"/>
                         <form:errors path="description" style="color: red"/>
                     </p>
-                    <input type="submit" value="Submit"/>	
+                    <input type="submit" class="black px-2" value="Submit"/>	
                 </form:form>
 			</div>
 		</div>

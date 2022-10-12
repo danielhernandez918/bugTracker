@@ -97,7 +97,7 @@ public class MainController {
 	            return 1;
 	        }
 	    });
-        List<Ticket> openTicketsCap = openTickets.stream().limit(7).collect(Collectors.toList());
+        List<Ticket> openTicketsCap = openTickets.stream().limit(10).collect(Collectors.toList());
         model.addAttribute("tickets", openTicketsCap);
         
         //add closed tickets from partners
@@ -121,7 +121,7 @@ public class MainController {
 //                return 1;
 //            }
 //        });
-        List<Ticket> closeTicketsCap = closeTickets.stream().limit(7).collect(Collectors.toList());
+        List<Ticket> closeTicketsCap = closeTickets.stream().limit(10).collect(Collectors.toList());
         model.addAttribute("closeTickets", closeTicketsCap);
         
         //list to compare users tickets
@@ -139,13 +139,13 @@ public class MainController {
         //	        }
         //	    });
         Collections.sort(userTickets, (o1, o2) -> (o1.getPoster().getUserName().compareTo(o2.getPoster().getUserName())));
-        List<Ticket> userTicketsCap = userTickets.stream().limit(7).collect(Collectors.toList());
+        List<Ticket> userTicketsCap = userTickets.stream().limit(10).collect(Collectors.toList());
 	    model.addAttribute("userTickets", userTicketsCap);
 	    
 	    //list to compare types of tickets
 	    List<Ticket> typeTickets = new ArrayList<>(openTickets);
 	    Collections.sort(typeTickets, (o1, o2) -> (o1.getType().compareTo(o2.getType())));
-	    List<Ticket> typeTicketsCap = typeTickets.stream().limit(7).collect(Collectors.toList());
+	    List<Ticket> typeTicketsCap = typeTickets.stream().limit(10).collect(Collectors.toList());
 	    model.addAttribute("typeTickets", typeTicketsCap);
 	    return "home.jsp";
     }

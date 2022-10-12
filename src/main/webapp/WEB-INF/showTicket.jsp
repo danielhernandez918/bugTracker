@@ -64,7 +64,7 @@
                         <form:errors path="priorityNum" style="color: red"/>
                         <form:errors path="description" style="color: red"/>
                         <form:errors path="poster" style="color: red"/>
-                        <input class="px-2" type="submit" value="Close Ticket"/>
+                        <input class="black px-2" type="submit" value="Close Ticket"/>
                     </form:form>
                 </c:if>
 

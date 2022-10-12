@@ -74,7 +74,7 @@
                             <form:option value="3" >Low</form:option>
                         </form:select>
                     </div>
-                    <input type="submit" value="Submit"/>	
+                    <input type="submit" class="black px-2" value="Submit"/>	
                 </form:form>
 			</div>
 		</div>
