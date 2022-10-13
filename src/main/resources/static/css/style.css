@@ -37,6 +37,12 @@
 	text-shadow: 0 0 3px rgb(0, 0, 0), 0 0 5px rgb(0, 0, 0);
 }
 
+.center {
+  	text-align: center;
+  	color:red;
+  	font-weight: bold;
+}
+
 .top {
 	width:75%
 }
@@ -99,8 +105,14 @@
 	justify-content:center;
 }
 
+
+
 .logo {
 	width:65%;
+}
+
+.logoLog {
+	width:45%;
 }
 
 .bar {

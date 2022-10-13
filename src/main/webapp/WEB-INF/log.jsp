@@ -13,6 +13,10 @@
 </head>
 <body>
 	<div class="container my-2">
+		<h1 class="center">Work in Progress</h1>
+		<div class="logoCenter">
+			<img class="logoLog" src="/image/OH.png" alt="logoPic">
+		</div>
 		<div class="d-flex justify-content-evenly">
 			<form:form action="/register" method="post" modelAttribute="newUser">
 				<h1>Register</h1>

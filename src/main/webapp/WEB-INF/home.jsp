@@ -29,11 +29,11 @@
 		<div class="top">
 			<div class="topBar">
 				<h1 class="mx-2">Logged in as: ${userName}</h1>
-				<div class="snu mx-2">
+				<!-- <div class="snu mx-2">
 					<p class="mx-2">Search</p>
 					<p class="mx-2">Notifcations</p>
 					<p class="mx-2">User Actions</p>
-				</div>
+				</div> -->
 			</div>
 			<div class="minHeight">
 				<div class="upperGap">

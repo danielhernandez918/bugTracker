@@ -27,13 +27,13 @@
 			<h1 class="textCenter" ><a class="black" href="/logout">Logout</a></h1>
 		</div>
 		<div class="top">
-            <div class="topBar">
+			<div class="topBar">
 				<h1 class="mx-2">Logged in as: ${userName}</h1>
-				<div class="d-flex mx-2">
-					<p>Search</p>
-					<p>Notifcations</p>
-					<p>User Actions</p>
-				</div>
+				<!-- <div class="snu mx-2">
+					<p class="mx-2">Search</p>
+					<p class="mx-2">Notifcations</p>
+					<p class="mx-2">User Actions</p>
+				</div> -->
 			</div>
             <div class="form-control minHeight mx-2 my-2">
 				<c:choose>
